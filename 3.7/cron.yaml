@@ -1,0 +1,4 @@
+cron:
+  - description: Scheduling task
+    url: /task
+    schedule: every 30 minutes

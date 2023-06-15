@@ -1,0 +1,34 @@
+runtime: python27
+api_version: 1
+threadsafe: false
+
+automatic_scaling:
+  min_instances: 0
+  max_instances: 1
+
+builtins:
+  - deferred: on
+
+handlers:
+  - url: /_ereporter.*
+    script: google.appengine.ext.ereporter.report_generator.application
+    login: admin
+
+  - url: /_ah/queue/deferred
+    script: google.appengine.ext.deferred.deferred.application
+    login: admin
+
+  - url: /_ah/queue/queue-push
+    script: main.app
+    login: admin
+
+  - url: /_ah/queue/queue-pull
+    script: main.app
+    login: admin
+
+  - url: /.*
+    script: main.app
+
+network:
+  forwarded_ports:
+    - 8027/tcp

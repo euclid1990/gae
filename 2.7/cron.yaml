@@ -1,0 +1,8 @@
+cron:
+  - description: Daily exception report
+    url: /_ereporter?sender=example@gmail.com&to=example@gmail.com
+    schedule: every day 00:00
+
+  - description: Scheduling task
+    url: /task
+    schedule: every 1 hours

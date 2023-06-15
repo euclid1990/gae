@@ -1,0 +1,17 @@
+# Credentials
+.env
+
+# Caches
+__pycache__
+*.pyc
+
+# Logs
+logs
+*.log
+
+# OS
+.DS_Store
+
+# Libs
+2.7/lib
+3.7/lib

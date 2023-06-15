@@ -1,0 +1,11 @@
+# Set the total storage limit for all queues to 120MB
+total_storage_limit: 120M
+
+queue:
+  - name: queue-push
+    mode: push
+    # Tasks will be dequeued and sent to their targets at the rate of 5 tasks per second.
+    rate: 5/s
+
+  - name: queue-pull
+    mode: pull

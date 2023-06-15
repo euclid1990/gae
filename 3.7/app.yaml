@@ -1,0 +1,33 @@
+runtime: python37
+app_engine_apis: true
+env_variables:
+  NDB_USE_CROSS_COMPATIBLE_PICKLE_PROTOCOL: "True"
+
+automatic_scaling:
+  min_instances: 0
+  max_instances: 1
+
+entrypoint: gunicorn -b :$PORT -w 2 main:app
+
+builtins:
+  - deferred: on
+
+handlers:
+  - url: /_ah/queue/deferred
+    script: google.appengine.ext.deferred.deferred.application
+    login: admin
+
+  - url: /_ah/queue/queue-push
+    script: main.app
+    login: admin
+
+  - url: /_ah/queue/queue-pull
+    script: main.app
+    login: admin
+
+  - url: /.*
+    script: main.app
+
+network:
+  forwarded_ports:
+    - 8080/tcp
